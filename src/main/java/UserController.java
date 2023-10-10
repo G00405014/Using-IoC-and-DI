@@ -1,13 +1,16 @@
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 public class UserController {
-    @GetMapping(value = "/registerUser/{name}{email}")
-    public String registerUser(@PathVariable String name, @PathVariable String email) {
-        return "registerUser/{name}{email}";
-    }
 
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/registerUser/{name}/{email}")
+    public String registerUser(@PathVariable String name, @PathVariable String email) {
+        return userService.registerUser(name, email);
+    }
 }
